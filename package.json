@@ -1,0 +1,21 @@
+{
+  "name": "trax_with-fixture",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "clean-results": "del /q allure-results\\*",
+    "clean-reports": "del /q allure-report\\*",
+    "generate-report": "allure generate allure-results -o allure-report --clean",
+    "open-report": "start allure open allure-report",
+    "delay": "timeout /t 10",
+    "report": "npm run generate-report && npm run open-report && npm run delay && npm run clean-reports && npm run clean-results"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.43.1",
+    "@types/node": "^20.12.7"
+  }
+}
