@@ -6,12 +6,12 @@ export class inspectionPage
     inspectionHeader: Locator
     
     //Element Rating related Locators
-    elementsTable: string
+    pageTable: string
     inspectionCommentBox: Locator
     completeInspectionBtn: Locator
 
-     //Attachment related Locators
-     firstElementAttachmentbtn: Locator
+    //Attachment related Locators
+    firstElementAttachmentbtn: Locator
     addAttachmentPopupbtn: Locator
     imageUpload: Locator
     attachmentCommentBox: Locator
@@ -27,7 +27,7 @@ export class inspectionPage
         this.inspectionHeader = page.locator('.location-header').first() 
 
         //Element Rating related Locators
-        this.elementsTable = '//*[@id="maincontent"]/div/div/inspection/div/section[2]/div[1]/div/div/div/table'
+        this.pageTable = 'table'
         this.inspectionCommentBox = page.getByPlaceholder('Place inspection comments here')
         this.completeInspectionBtn = page.getByRole('button', { name: 'Complete Inspection' })
 
@@ -56,9 +56,9 @@ export class inspectionPage
     async performInspection()
     
     {
-        await this.page.waitForSelector(this.elementsTable);
+        await this.page.waitForSelector(this.pageTable);
         const elementRows = await this.page.$$('table.table tbody tr') //Locating the table rows for all elements
-        console.log('Number of rows found:', elementRows.length); 
+        console.log('Number of element rows found:', elementRows.length); 
 
          for (const row of elementRows) 
          {
@@ -85,5 +85,6 @@ export class inspectionPage
     {
         await this.completeInspectionBtn.click()
         await this.followupNoBtn.click()
+        await this.page.waitForSelector(this.pageTable);
     }
 } 

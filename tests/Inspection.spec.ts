@@ -19,12 +19,15 @@ test.beforeEach('Login',async({page})=>
 test ('Inspection from web without Follow up',async({page})=>
 {
     const pm =  new PageManager(page)
+
     await pm.homePage().ClickMenu('Inspections', 'Inspection Locations')
     await pm.inspectionLocationsPage().createInspection(testData.inspectionData.location)
+    
     const inspectionID= await pm.inspectionPage().getInspectionID()
     console.log(inspectionID)
     await pm.inspectionPage().performInspection()
     await pm.inspectionPage().completeInspectionWithoutFollowUp()
 
     await pm.homePage().ClickMenu('Inspections', 'Inspection Logs')
+    await pm.inspectionLogsPage().openInspectionLog(inspectionID)
 })

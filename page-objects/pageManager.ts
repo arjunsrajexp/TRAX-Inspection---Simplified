@@ -3,7 +3,7 @@ import { LoginPage } from './loginPage'
 import { HomePage } from './homePage'
 import { inspectionLocationsPage } from './inspectionLocationsPage'
 import { inspectionPage } from './inspectionPage'
-import { inspectionLogsPage } from './inspectionLogsPage'
+import { inspectionLogsListPage } from './inspectionLogsListPage'
 export class PageManager
  {
     private readonly page: Page
@@ -12,7 +12,7 @@ export class PageManager
     private readonly home: HomePage
     private readonly inspectionLocations: inspectionLocationsPage
     private readonly inspection: inspectionPage
-    private readonly inspectionLog: inspectionLogsPage
+    private readonly inspectionLogList: inspectionLogsListPage
 
     constructor(page: Page) {
         this.page = page
@@ -20,7 +20,7 @@ export class PageManager
         this.home = new HomePage(this.page)
         this.inspectionLocations = new inspectionLocationsPage(this.page)
         this.inspection = new inspectionPage(this.page)
-        this.inspectionLog = new inspectionLogsPage(this.page)
+        this.inspectionLogList = new inspectionLogsListPage(this.page)
     }
 
     /** Methods below will return the object of the corresponding class */
@@ -32,5 +32,5 @@ export class PageManager
 
     inspectionPage() { return this.inspection }
 
-    inspectionLogsPage() { return this.inspectionLog }
+    inspectionLogsPage() { return this.inspectionLogList }
 }
