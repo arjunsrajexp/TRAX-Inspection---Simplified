@@ -1,0 +1,15 @@
+{
+    "loginData":{
+        "userName":"autoinsp@yopmail.com",
+        "password":"Autoinsp@123",
+        "userFullName": "Automation Inspector"
+    },
+
+    "inspectionData":{
+        "location": "Automation Test Location",
+        "inspectionCompletionComment": "Inspection completed as part of Automation Test",
+        "sampleImage":"uploadFiles/sampleFile.jpeg",
+        "attachmentComment": "Sample Image Attached",
+        "":""
+    }
+}
