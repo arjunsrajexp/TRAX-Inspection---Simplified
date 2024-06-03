@@ -19,15 +19,25 @@ test.beforeEach('Login',async({page})=>
 test ('Inspection from web without Follow up',async({page})=>
 {
     const pm =  new PageManager(page)
+    let inspectionID
+    await test.step("Create Inspection",async()=>{
+        await pm.homePage().ClickMenu('Inspections', 'Inspection Locations')
+        await pm.inspectionLocationsPage().createInspection(testData.inspectionData.location)
+    })
 
-    await pm.homePage().ClickMenu('Inspections', 'Inspection Locations')
-    await pm.inspectionLocationsPage().createInspection(testData.inspectionData.location)
+    await test.step("Perform Inspection",async()=>{
+        inspectionID= await pm.inspectionPage().getInspectionID()
+        console.log(inspectionID)
+        await pm.inspectionPage().performInspection()
+        await pm.inspectionPage().completeInspectionWithoutFollowUp()
+    })
     
-    const inspectionID= await pm.inspectionPage().getInspectionID()
-    console.log(inspectionID)
-    await pm.inspectionPage().performInspection()
-    await pm.inspectionPage().completeInspectionWithoutFollowUp()
+   
+    await test.step("Verify Inspection Log",async()=>{
 
-    await pm.homePage().ClickMenu('Inspections', 'Inspection Logs')
-    await pm.inspectionLogsPage().openInspectionLog(inspectionID)
+        await pm.homePage().ClickMenu('Inspections', 'Inspection Logs')
+    const inspStatus = await pm.inspectionLogsPage().getInspectionStatusandOpenLog(inspectionID)
+    expect(inspStatus).toEqual("Complete")
+    })
+    
 })

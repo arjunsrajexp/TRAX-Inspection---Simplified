@@ -13,17 +13,25 @@ export class inspectionLogsListPage
         this.inspectionLogSearchBox = page.getByPlaceholder('Search')
         this.inspectionLogSearchButton = page.getByRole('button', { name: '' })
     }
-    
-    async openInspectionLog(inspectionID)
+    /**Loops through the entries in Inspection Logs Page and Rerturns the Status of the Inspection that is 
+     * Completed. Also clicks on that Inspection record to open the Inspection Log
+     * @param inspectionID: ID of the inspection to be searched in the logs
+     */
+    async getInspectionStatusandOpenLog(inspectionID)
     {
-        await this.inspectionLogSearchBox.fill(inspectionID)
-        await this.inspectionLogSearchButton.click()
         await this.page.waitForSelector(this.inspectionsTable)
         const inspectionRows = await this.page.$$('table.table tbody tr')
         console.log('Number of inspection logs found:', inspectionRows.length); 
-        if (inspectionRows.length == 1)
+        for (const row of inspectionRows)
             {
-                
+                const idColumn = await row.$('td:nth-child(1)'); // Locating the 1st column in the table which contains Inspection ID
+                const statusColumn = await row.$('td:nth-child(7)'); // Locating the 7th column in the table which contains Inspection Status
+                if (await idColumn?.textContent() == inspectionID)
+                    {
+                    const inspStatus= await statusColumn?.textContent()
+                    await idColumn?.click() //Clicks on the 1st column to open the detailed inspection log
+                    return inspStatus
+                }           
             }
     }
 }

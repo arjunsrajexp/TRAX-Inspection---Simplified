@@ -85,6 +85,6 @@ export class inspectionPage
     {
         await this.completeInspectionBtn.click()
         await this.followupNoBtn.click()
-        await this.page.waitForSelector(this.pageTable);
+        await this.page.waitForSelector(this.pageTable); 
     }
 } 
