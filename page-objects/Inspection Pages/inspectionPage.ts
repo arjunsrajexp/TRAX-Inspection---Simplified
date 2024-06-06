@@ -64,7 +64,7 @@ export class inspectionPage {
                 elementsList.push(elementName);
             }
         }
-        elementsList = elementsList.map(item => item.replace(/\s/g, '')); //Removes any spaces from extracted elements List
+        elementsList = elementsList.map(item => item.replace(/\s/g, '')); // Removes Any Spaces from the returned Elements List
         return elementsList
     }
 

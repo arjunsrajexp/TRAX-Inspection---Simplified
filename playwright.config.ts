@@ -1,5 +1,6 @@
 import { defineConfig, devices } from '@playwright/test';
 
+
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
@@ -38,6 +39,22 @@ export default defineConfig({
       use: 
       { 
         ...devices['Desktop Chrome'],
+        baseURL:'https://app.qa.traxinsights.app/',
+      },   
+    },
+    {
+      name: 'QA_Firefox',
+      use: 
+      { 
+        ...devices['Desktop Firefox'],
+        baseURL:'https://app.qa.traxinsights.app/',
+      },   
+    },
+    {
+      name: 'QA_Edge',
+      use: 
+      { 
+        ...devices['Desktop Edge'],channel:'msedge',
         baseURL:'https://app.qa.traxinsights.app/',
       },   
     },

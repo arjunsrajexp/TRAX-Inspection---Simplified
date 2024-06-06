@@ -10,7 +10,7 @@ export class inspectionLogDetailPage
     {
         this.page = page
         this.inspectionID = page.locator('.clipping-wrapper').first()
-        //this.elementsTable = 'table[class="table table-bordered table-background"]'
+        this.elementsTable = 'table[class="table table-bordered table-background"]'
     }
 
     /**Returns The Inspection ID from the Log Detail */
