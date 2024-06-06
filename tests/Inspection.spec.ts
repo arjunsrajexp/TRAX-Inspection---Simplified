@@ -19,10 +19,19 @@ test.beforeEach('Login',async({page})=>
 test ('Inspection from web without Follow up',async({page})=>
 {
     const pm =  new PageManager(page)
-    let inspectionID
+    let inspectionID: string | undefined ='0'
+    let expectedElements: string[] =[]
+    let actualElements: string[] =[]
+
     await test.step("Create Inspection",async()=>{
         await pm.homePage().ClickMenu('Inspections', 'Inspection Locations')
         await pm.inspectionLocationsPage().createInspection(testData.inspectionData.location)
+        await expect(pm.inspectionPage().inspectionHeader).toBeVisible()
+    })
+
+    await test.step("Get Elements List",async()=>{
+        expectedElements = await pm.inspectionPage().getElementsList()
+        console.log (`Elements Inspected: ${expectedElements}`)
     })
 
     await test.step("Perform Inspection",async()=>{
@@ -32,12 +41,19 @@ test ('Inspection from web without Follow up',async({page})=>
         await pm.inspectionPage().completeInspectionWithoutFollowUp()
     })
     
-   
     await test.step("Verify Inspection Log",async()=>{
-
+        
+        //Search For the Performed Inspection ID in Log and Verify Status as "Complete"
         await pm.homePage().ClickMenu('Inspections', 'Inspection Logs')
-    const inspStatus = await pm.inspectionLogsPage().getInspectionStatusandOpenLog(inspectionID)
-    expect(inspStatus).toEqual("Complete")
+        const inspStatus = await pm.inspectionLogsPage().getInspectionStatusandOpenLog(inspectionID)
+        expect(inspStatus).toEqual("Complete") //Assertion #1
+
+        //Open the Inspection log and ensure the Inspection ID and Elements List is correct
+        const idFromLog = await pm.inspectionLogDetailPage().getinspectionIDfromLog()
+        expect(idFromLog).toEqual(inspectionID) //Assertion #2
+        actualElements = await pm.inspectionLogDetailPage().getelementsListFromLog()
+        console.log (`Elements From Log: ${actualElements}`)
+        expect(actualElements).toEqual(expectedElements) //Assertion #3
     })
     
 })

@@ -1,9 +1,10 @@
 import { Page } from '@playwright/test'
 import { LoginPage } from './loginPage'
 import { HomePage } from './homePage'
-import { inspectionLocationsPage } from './inspectionLocationsPage'
-import { inspectionPage } from './inspectionPage'
-import { inspectionLogsListPage } from './inspectionLogsListPage'
+import { inspectionLocationsPage } from './Inspection Pages/inspectionLocationsPage'
+import { inspectionPage } from './Inspection Pages/inspectionPage'
+import { inspectionLogsListPage } from './Inspection Pages/inspectionLogsListPage'
+import { inspectionLogDetailPage } from './Inspection Pages/inspectionLogDetailpage'
 export class PageManager
  {
     private readonly page: Page
@@ -13,6 +14,7 @@ export class PageManager
     private readonly inspectionLocations: inspectionLocationsPage
     private readonly inspection: inspectionPage
     private readonly inspectionLogList: inspectionLogsListPage
+    private readonly inspectionLogDetail: inspectionLogDetailPage
 
     constructor(page: Page) {
         this.page = page
@@ -21,6 +23,7 @@ export class PageManager
         this.inspectionLocations = new inspectionLocationsPage(this.page)
         this.inspection = new inspectionPage(this.page)
         this.inspectionLogList = new inspectionLogsListPage(this.page)
+        this.inspectionLogDetail = new inspectionLogDetailPage(this.page)
     }
 
     /** Methods below will return the object of the corresponding class */
@@ -33,4 +36,6 @@ export class PageManager
     inspectionPage() { return this.inspection }
 
     inspectionLogsPage() { return this.inspectionLogList }
+
+    inspectionLogDetailPage() { return this.inspectionLogDetail}
 }

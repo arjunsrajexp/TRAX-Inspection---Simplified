@@ -3,15 +3,11 @@ export class inspectionLogsListPage
 {
     readonly page: Page
     inspectionsTable: string
-    inspectionLogSearchBox: Locator
-    inspectionLogSearchButton: Locator
 
     constructor(page: Page) 
     {
         this.page = page
         this.inspectionsTable = 'table'
-        this.inspectionLogSearchBox = page.getByPlaceholder('Search')
-        this.inspectionLogSearchButton = page.getByRole('button', { name: '' })
     }
     /**Loops through the entries in Inspection Logs Page and Rerturns the Status of the Inspection that is 
      * Completed. Also clicks on that Inspection record to open the Inspection Log
