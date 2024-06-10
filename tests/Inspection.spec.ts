@@ -2,13 +2,6 @@ import {test, expect, Fixtures} from '@playwright/test'
 import { PageManager } from '../page-objects/pageManager'
 import testData from '../test-data/testData.json'
 
-const testData1= {
-    userName:"autoinsp@yopmail.com",
-    password:"Autoinsp@123",
-    userFullName: "Automation Inspector",
-    inspectionLocation: "Automation Test Location"
-}
-
 test.beforeEach('Login',async({page})=>
 {
     const pm = new PageManager(page)
@@ -48,12 +41,15 @@ test ('Inspection from web without Follow up',async({page})=>
         const inspStatus = await pm.inspectionLogsPage().getInspectionStatusandOpenLog(inspectionID)
         expect(inspStatus).toEqual("Complete") //Assertion #1
 
-        //Open the Inspection log and ensure the Inspection ID and Elements List is correct
+        //Open the Inspection log and ensure the Inspection ID, Inspection Location and Elements List is populated correctly
         const idFromLog = await pm.inspectionLogDetailPage().getinspectionIDfromLog()
         expect(idFromLog).toEqual(inspectionID) //Assertion #2
+
+        const locationFromLog = await pm.inspectionLogDetailPage().getinspectionLocationfromLog()
+        expect(locationFromLog).toEqual(testData.inspectionData.location) //Assertion #3
+        
         actualElements = await pm.inspectionLogDetailPage().getelementsListFromLog()
         console.log (`Elements From Log: ${actualElements}`)
-        expect(actualElements).toEqual(expectedElements) //Assertion #3
-    })
-    
+        expect(actualElements).toEqual(expectedElements) //Assertion #4
+    })   
 })
