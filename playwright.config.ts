@@ -58,7 +58,7 @@ export default defineConfig({
       use: 
       { 
         ...devices['Desktop Edge'],channel:'msedge',
-        baseURL:'https://app.qa.traxinsights.app/',
+        baseURL:'https://app.qa.flagship.traxinsights.app/',
       },   
     },
     {

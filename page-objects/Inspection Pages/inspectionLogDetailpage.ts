@@ -1,14 +1,12 @@
 import { Page, Locator } from '@playwright/test'
 import testData from '../../test-data/testData.json'
-export class inspectionLogDetailPage
-{
+export class inspectionLogDetailPage {
     readonly page: Page
     inspectionID: Locator
     elementsTable: string
     inspectionLocation: Locator
-    
-    constructor(page: Page) 
-    {
+
+    constructor(page: Page) {
         this.page = page
         this.inspectionID = page.locator('.clipping-wrapper').first()
         this.inspectionLocation = page.locator('.clipping-wrapper').nth(3)
@@ -16,25 +14,21 @@ export class inspectionLogDetailPage
     }
 
     /**Returns The Inspection ID from the Log Detail */
-    async getinspectionIDfromLog()
-    {
+    async getinspectionIDfromLog() {
         return await this.inspectionID.innerText()
     }
 
-      /**Returns The Inspection Location from the Log Detail */
-      async getinspectionLocationfromLog()
-      {
+    /**Returns The Inspection Location from the Log Detail */
+    async getinspectionLocationfromLog() {
         return await this.inspectionLocation.innerText()
-      }
+    }
 
-    
     /**Returns the Elements List from the Log Details  */
-    async getelementsListFromLog()
-    {
+    async getelementsListFromLog() {
         await this.page.waitForSelector(this.elementsTable)
         let elementsList: string[] = []
         const tableRows = await this.page.$$('table[class="table table-bordered table-background"] div[class="ng-star-inserted"]')
-        
+
         for (const row of tableRows) {
             const elementNameColumn = await row.$('div[style="word-break: break-all;"]'); //Locataing the element Names in the 1st column
             const elementName = (await elementNameColumn?.textContent())

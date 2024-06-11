@@ -1,0 +1,6 @@
+Elements Inspected: AirPurifier,Mirror,ToiletandUrinals,Consumables
+144885
+Number of element rows found: 4
+Number of inspection logs found: 25
+Elements From Log: AirPurifier,Mirror,ToiletandUrinals,Consumables
+Inspection ID from Overview Page: 144885

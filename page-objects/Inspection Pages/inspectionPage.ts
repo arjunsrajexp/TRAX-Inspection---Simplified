@@ -100,7 +100,7 @@ export class inspectionPage {
             throw new Error("Follow up Cleaning Alert after Inspection Not Configured for the current Location!")
         }
     }
-    
+
     /**Completes the Inspection without Creating Follow Up Cleaning Alert . Checks whether the 
      * System asks if Follow up is required and Clicks on 'No' if asked */
     async completeInspectionWithoutFollowUp() {
@@ -111,6 +111,6 @@ export class inspectionPage {
         //Wait till the page is completely loaded before
         //proceeding to next action (Waiting for API response of Inspection Locations)
         await this.page.waitForResponse
-            (response => response.url().includes('https://api.qa.traxinsights.app/venue/venue/locations/') && response.status() === 200);
+            (response => response.url().includes('/venue/venue/locations/') && response.status() === 200);
     }
 } 
