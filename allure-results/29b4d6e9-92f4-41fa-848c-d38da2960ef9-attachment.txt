@@ -1,0 +1,3 @@
+Elements Inspected: AirPurifier,Mirror,ToiletandUrinals,Consumables
+144849
+Number of element rows found: 4

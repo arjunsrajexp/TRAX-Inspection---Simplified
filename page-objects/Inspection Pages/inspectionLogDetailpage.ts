@@ -5,11 +5,13 @@ export class inspectionLogDetailPage
     readonly page: Page
     inspectionID: Locator
     elementsTable: string
+    inspectionLocation: Locator
     
     constructor(page: Page) 
     {
         this.page = page
         this.inspectionID = page.locator('.clipping-wrapper').first()
+        this.inspectionLocation = page.locator('.clipping-wrapper').nth(3)
         this.elementsTable = 'table[class="table table-bordered table-background"]'
     }
 
@@ -18,6 +20,13 @@ export class inspectionLogDetailPage
     {
         return await this.inspectionID.innerText()
     }
+
+      /**Returns The Inspection Location from the Log Detail */
+      async getinspectionLocationfromLog()
+      {
+        return await this.inspectionLocation.innerText()
+      }
+
     
     /**Returns the Elements List from the Log Details  */
     async getelementsListFromLog()
